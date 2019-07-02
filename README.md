@@ -1,1 +1,1 @@
-# pytelev
+# PyVKV - Python-based VK Voicebot

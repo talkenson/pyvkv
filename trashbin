@@ -1,0 +1,23 @@
+[{
+    "action": {
+        "type": "location",
+        "payload": "{\"button\": \"1\"}"
+    }
+}],
+[{
+    "action": {
+        "type": "open_app",
+        "app_id": 6979558,
+        "owner_id": -181108510,
+        "hash": "sendKeyboard",
+        "label": "Отправить клавиатуру"
+    }
+}],
+[{
+    "action": {
+        "type": "vkpay",
+        "hash": "action=transfer-to-group&group_id=181108510&aid=10"
+    }
+}],
+
+// Типы кнопок, чтобы лишний раз не лазить в апи

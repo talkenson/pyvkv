@@ -22,7 +22,7 @@ class VKAPI:
                         'v':'5.95',
                         'keyboard':json.dumps(keyboard),
                         'access_token':self.token})
-        print(sr.text)
+        #print(sr.text)
         print('[API] \tMessage sent, check manually.')
 
     def getPeer(self, peer, force=False):

@@ -30,9 +30,9 @@ plugins = {}
 
 VOMAIL = 'http://test-vm.mts-intercom.ru/api/values/'
 
-bot_token = 'a4a6e03953950b3786e2287357a511e6d04357faf2d951e35a5a88c69dc350d7534b6fcaecaff7fb1ba21'
+bot_token = ''
 bot_id = ''
-savefile_name = 'lp_pref.ini'
+savefile_name = 'lp_pref.ini' # Default
 pref = {'server': 'https://lp.vk.com/wh' + bot_id,
         'key': 'sample_but_not_empty',
         'ts': 0}
@@ -74,6 +74,7 @@ def load_prefs():
     bot_id = config['PREF']['group_id']
 
     print('[HOST] \tPreferences loaded')
+    
 
 
 
@@ -133,10 +134,12 @@ class BOT_MANAGER:
         #    hub_add({'target':'control','action':'stop','proc':found,'from': me})
         #    return
 
+
+load_prefs()
+
 VK = VKAPI(bot_token)
 BOT = BOT_MANAGER()
 
-load_prefs()
 
 print('\n[HOST] \tLongpoll starting...')
 
@@ -151,18 +154,19 @@ def gupd():
         try:
             r = req.get('%s?act=a_check&key=%s&ts=%s&wait=25&mode=2&version=3' % (pref['server'],pref['key'],pref['ts']), timeout=10).json()
         except req.exceptions.RequestException:
-            print('Exception ', r)
+            #print('Exception ', r)
             continue
 
-        print(r)
+        #print(r)
+        #print(bot_token)
 
         if 'failed' in r:
             if r['failed']==1:
-                print('[HOST] Refreshing TS')
+                print('[HOST]\tRefreshing TS')
                 pref['ts']=r['ts']
                 continue
             if r['failed']==2:
-                print('[HOST] Refreshing KEY')
+                print('[HOST]\tRefreshing KEY')
                 urla = 'https://api.vk.com/method/groups.getLongPollServer?group_id='+bot_id+'&lp_version=3&v=5.95&access_token=' + bot_token
                 #print(urla)
                 new = req.get(urla).json()
@@ -175,10 +179,10 @@ def gupd():
                 #print(pref)
                 continue
             if r['failed']==3:
-                print('[HOST] Refresh KEY, TS (User data corrupted)')
+                print('[HOST]\tRefresh KEY, TS (User data corrupted)')
                 continue
             if r['failed']==4:
-                print('[HOST] Unallowable VERSION')
+                print('[HOST]\tUnallowable VERSION')
                 break
             continue
 

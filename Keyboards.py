@@ -23,7 +23,7 @@ mainMenu = {
                 "payload": "{\"act\":\"exit\"}",
                 "label": "Выключить бота"
                 },
-            "color": "primary"
+            "color": "negative"
         }]
         ]
     }

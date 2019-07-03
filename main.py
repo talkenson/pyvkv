@@ -94,7 +94,7 @@ class BOT_MANAGER:
 
             elif action == 'checkNew':
                 VK.send(ob['peer_id'], 'Проверяю на наличие новых сообщений, если что - высылаю')
-                
+
 
 
 
@@ -149,8 +149,9 @@ def gupd():
 
     while True:
         try:
-            r = req.get('%s?act=a_check&key=%s&ts=%s&wait=25&mode=2&version=3' % (pref['server'],pref['key'],pref['ts'])).json()
+            r = req.get('%s?act=a_check&key=%s&ts=%s&wait=25&mode=2&version=3' % (pref['server'],pref['key'],pref['ts']), timeout=10).json()
         except req.exceptions.RequestException:
+            print('Exception ', r)
             continue
 
         print(r)
